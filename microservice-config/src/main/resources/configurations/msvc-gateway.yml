@@ -1,0 +1,20 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: msvc-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: patients
+          uri: lb://msvc-patient
+          predicates:
+            - Path=/api/v1/patients/**
+        - id: doctors
+          uri: lb://msvc-doctor
+          predicates:
+            - Path=/api/v1/doctors/**

@@ -1,4 +1,5 @@
-FROM openjdk:17-jdk-alpine
+FROM openjdk:17-slim
 VOLUME /tmp
-COPY target/msvc-gateway-0.0.1-SNAPSHOT.jar app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+COPY target/microservice-gateway-0.0.1-SNAPSHOT.jar app_microservice-gateway.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","app_microservice-gateway.jar"]

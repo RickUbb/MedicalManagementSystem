@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  config-server:
+    build: ./microservice-config
+    ports:
+      - "8888:8888"
+    networks:
+      - microservices-network
+
+  eureka-server:
+    build: ./microservice-eureka
+    ports:
+      - "8761:8761"
+    depends_on:
+      - config-server
+    networks:
+      - microservices-network
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  gateway:
+    build: ./microservice-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - eureka-server
+    networks:
+      - microservices-network
+
+networks:
+  microservices-network:
+    driver: bridge

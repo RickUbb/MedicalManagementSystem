@@ -1,12 +1,14 @@
 spring:
   application:
-    name: msvc-gateway
-  cloud:
-    gateway:
-      discovery:
-        locator:
-          enabled: true
+    name: gateway
 
+  cloud:
+    config:
+      uri: http://config-server:8888
+      fail-fast: true
+
+  config:
+    import: "optional:configserver:"
 
 server:
   port: 8080
@@ -14,5 +16,9 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://eureka-server:8761/eureka
+      defaultZone: http://eureka-server:8761/eureka/
+
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    leaseExpirationDurationInSeconds: 30
 

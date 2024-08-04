@@ -2,6 +2,7 @@ package com.microservice.billing.controller;
 
 import com.microservice.billing.entities.Bill;
 import com.microservice.billing.service.BillService;
+import com.microservice.billing.service.IBillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +13,7 @@ import java.util.List;
 @RequestMapping("/api/v1/bills")
 public class BillController {
     @Autowired
-    private BillService billService;
+    private IBillService billService;
 
     @GetMapping
     public ResponseEntity<List<Bill>> findAllBills() {

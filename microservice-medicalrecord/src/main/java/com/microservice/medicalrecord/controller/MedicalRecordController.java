@@ -1,6 +1,7 @@
 package com.microservice.medicalrecord.controller;
 
 import com.microservice.medicalrecord.entities.MedicalRecord;
+import com.microservice.medicalrecord.service.IMedicalRecordService;
 import com.microservice.medicalrecord.service.MedicalRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +15,7 @@ import java.util.List;
 public class MedicalRecordController {
 
     @Autowired
-    private MedicalRecordService medicalRecordService;
+    private IMedicalRecordService medicalRecordService;
 
     @GetMapping
     public ResponseEntity<List<MedicalRecord>> findAllMedicalRecord() {

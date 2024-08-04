@@ -7,6 +7,7 @@ import com.microservice.appointment.dto.PatientDTO;
 import com.microservice.appointment.entities.Appointment;
 import com.microservice.appointment.http.response.PatientByAppointmentResponse;
 import com.microservice.appointment.service.AppointmentService;
+import com.microservice.appointment.service.IAppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ import java.util.List;
 public class AppointmentController {
 
     @Autowired
-    private AppointmentService appointmentService;
+    private IAppointmentService appointmentService;
 
     @Autowired
     private PatientClient patientClient;

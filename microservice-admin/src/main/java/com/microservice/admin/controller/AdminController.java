@@ -15,7 +15,7 @@ import javax.management.relation.Role;
 public class AdminController {
 
     @Autowired
-    private AdminService adminService;
+    private IAdminService adminService;
 
     @GetMapping
     public ResponseEntity<?> findAllAdmins() {

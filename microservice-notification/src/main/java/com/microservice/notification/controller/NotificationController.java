@@ -1,6 +1,7 @@
 package com.microservice.notification.controller;
 
 import com.microservice.notification.entities.Notification;
+import com.microservice.notification.service.INotificationService;
 import com.microservice.notification.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/notifications")
 public class NotificationController {
     @Autowired
-    private NotificationService notificationService;
+    private INotificationService notificationService;
 
     @GetMapping
     public ResponseEntity<?> findAllNotifications() {

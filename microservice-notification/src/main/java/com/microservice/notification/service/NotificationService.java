@@ -3,10 +3,12 @@ package com.microservice.notification.service;
 import com.microservice.notification.entities.Notification;
 import com.microservice.notification.persistence.NotificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Service
 public class NotificationService implements INotificationService {
 
     @Autowired

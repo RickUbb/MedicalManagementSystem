@@ -2,6 +2,7 @@ package com.microservice.doctor.controller;
 
 import com.microservice.doctor.entities.Doctor;
 import com.microservice.doctor.service.DoctorService;
+import com.microservice.doctor.service.IDoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/doctors")
 public class DoctorController {
     @Autowired
-    private DoctorService doctorService;
+    private IDoctorService doctorService;
 
     @GetMapping
     public ResponseEntity<?> findAllDoctors() {

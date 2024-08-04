@@ -10,11 +10,31 @@ spring:
         locator:
           enabled: true
       routes:
-        - id: patients
-          uri: lb://msvc-patient
+        - id: admins
+          uri: http://localhost:8097
           predicates:
-            - Path=/api/v1/patients/**
+            - Path=/api/v1/admins/**
+        - id: appointments
+          uri: http://localhost:8093
+          predicates:
+            - Path=/api/v1/appointments/**
+        - id: billings
+          uri: http://localhost:8094
+          predicates:
+            - Path=/api/v1/bills/**
         - id: doctors
-          uri: lb://msvc-doctor
+          uri: http://localhost:8092
           predicates:
             - Path=/api/v1/doctors/**
+        - id: medicalRecords
+          uri: http://localhost:8095
+          predicates:
+            - Path=/api/v1/medical-record/**
+        - id: notifications
+          uri: http://localhost:8096
+          predicates:
+            - Path=/api/v1/notifications/**
+        - id: patients
+          uri: http://localhost:8091
+          predicates:
+            - Path=/api/v1/patients/**git status

@@ -1,9 +1,4 @@
-server:
-  port: 8097
-
 spring:
-  application:
-    name: msvc-admin
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://admin-db:3306/admindb
@@ -11,16 +6,8 @@ spring:
     password: rootpassword
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     database: mysql
     database-platform: org.hibernate.dialect.MySQL8Dialect
-  config:
-    import: optional:configserver:http://config-server:8888
 
-eureka:
-  instance:
-    hostname: localhost
-  client:
-    service-url:
-      defaultZone: http://eureka-server:8761/eureka/
 

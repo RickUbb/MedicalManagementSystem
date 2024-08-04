@@ -1,5 +1,13 @@
 spring:
   application:
-    name: msvc-eureka
-  config:
-    import: optional:configserver:http://localhost:8888
+    name: eureka-server
+
+server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: eureka-server
+  client:
+    registerWithEureka: false
+    fetchRegistry: false

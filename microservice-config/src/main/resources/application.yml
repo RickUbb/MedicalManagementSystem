@@ -4,11 +4,14 @@ spring:
   cloud:
     config:
       server:
-        native:
-          search-locations: classpath:/configurations
+        git:
+          uri: https://github.com/RickUbb/MedicalManagementSystem.git
+          search-paths: microservice-config/src/main/resources/configurations
+          default-label: pruebas
 server:
   port: 8888
 
-logging:
-  level:
-    root: DEBUG
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka/

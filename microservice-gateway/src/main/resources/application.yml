@@ -1,5 +1,18 @@
 spring:
-  config:
-    import: optional:configserver:http//localhost:8888
   application:
-    name: msvs-gateway
+    name: msvc-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+
+
+server:
+  port: 8080
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka
+

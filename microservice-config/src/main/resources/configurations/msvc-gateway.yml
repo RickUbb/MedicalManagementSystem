@@ -37,4 +37,4 @@ spring:
         - id: patients
           uri: http://localhost:8091
           predicates:
-            - Path=/api/v1/patients/**git status
+            - Path=/api/v1/patients/**

@@ -1,5 +1,5 @@
 spring:
   application:
-      name: msvc-doctort
+      name: msvc-doctor
   config:
       import: optional:configserver:http://localhost:8888

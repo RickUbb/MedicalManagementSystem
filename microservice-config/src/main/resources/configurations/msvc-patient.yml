@@ -15,8 +15,6 @@ spring:
       ddl-auto: create
     database: mysql
     database-platform: org.hibernate.dialect.MySQL8Dialect
-    config:
-      import: optional:configserver:http://config-server:8888
 
 eureka:
   instance:

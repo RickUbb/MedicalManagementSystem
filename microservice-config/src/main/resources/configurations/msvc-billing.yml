@@ -14,8 +14,6 @@ spring:
       ddl-auto: create
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-  config:
-    import: optional:configserver:http://localhost:8888
 
 eureka:
   instance:

@@ -27,6 +27,69 @@ services:
     networks:
       - microservices-network
 
+  patient-service:
+    build: ./microservice-patient
+    ports:
+      - "8091:8091"
+    depends_on:
+      - eureka-server
+    networks:
+      - microservices-network
+
+  doctor-service:
+    build: ./microservice-doctor
+    ports:
+      - "8092:8092"
+    depends_on:
+      - eureka-server
+    networks:
+      - microservices-network
+
+  appointment-service:
+    build: ./microservice-appointment
+    ports:
+      - "8093:8093"
+    depends_on:
+      - eureka-server
+    networks:
+      - microservices-network
+
+  billing-service:
+    build: ./microservice-billing
+    ports:
+      - "8094:8094"
+    depends_on:
+      - eureka-server
+    networks:
+      - microservices-network
+
+  medicalrecord-service:
+    build: ./microservice-medicalrecord
+    ports:
+      - "8095:8095"
+    depends_on:
+      - eureka-server
+    networks:
+      - microservices-network
+
+  notification-service:
+    build: ./microservice-notification
+    ports:
+      - "8096:8096"
+    depends_on:
+      - eureka-server
+    networks:
+      - microservices-network
+
+  admin-service:
+    build: ./microservice-admin
+    ports:
+      - "8097:8097"
+    depends_on:
+      - eureka-server
+    networks:
+      - microservices-network
+
 networks:
   microservices-network:
     driver: bridge

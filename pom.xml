@@ -22,6 +22,13 @@
         <module>microservice-gateway</module>
         <module>microservice-eureka</module>
         <module>microservice-config</module>
+        <module>microservice-patient</module>
+        <module>microservice-doctor</module>
+        <module>microservice-appointment</module>
+        <module>microservice-billing</module>
+        <module>microservice-medicalrecord</module>
+        <module>microservice-notification</module>
+        <module>microservice-admin</module>
     </modules>
 
     <properties>

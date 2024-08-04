@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class AppointmentService implements IAppointmentService {
@@ -45,16 +46,21 @@ public class AppointmentService implements IAppointmentService {
 
     @Override
     public List<PatientByAppointmentResponse> findAllAppointmentsWithDetails() {
-        return appointmentRepository.findAll().forEach().map(appointment -> {
-            PatientDTO patient = patientClient.findPatientById(appointment.getPatientId());
-            DoctorDTO doctor = doctorClient.findDoctorById(appointment.getIdDoctor());
-            return PatientByAppointmentResponse.builder()
-                    .appointmentReason(appointment.getReason())
-                    .appointmentDate(appointment.getAppointmentDate().toString())
-                    .patient(patient)
-                    .doctor(doctor)
-                    .build();
-        }).collect(Collectors.toList());
+        List<Appointment> appointments = StreamSupport.stream(appointmentRepository.findAll().spliterator(), false)
+                .collect(Collectors.toList());
+
+        return appointments.stream()
+                .map(appointment -> {
+                    PatientDTO patient = patientClient.findPatientById(appointment.getPatientId());
+                    DoctorDTO doctor = doctorClient.findDoctorById(appointment.getDoctorId());
+                    return PatientByAppointmentResponse.builder()
+                            .appointmentReason(appointment.getReason())
+                            .appointmentDate(appointment.getAppointmentDate().toString())
+                            .patient(patient)
+                            .doctor(doctor)
+                            .build();
+                })
+                .collect(Collectors.toList());
     }
 
     /*@Override

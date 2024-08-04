@@ -1,4 +1,5 @@
 version: '3.8'
+
 services:
   config-server:
     build: ./microservice-config
@@ -6,89 +7,77 @@ services:
       - "8888:8888"
     networks:
       - microservices-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8888/actuator/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   eureka-server:
     build: ./microservice-eureka
     ports:
       - "8761:8761"
     depends_on:
-      - config-server
+      config-server:
+        condition: service_healthy
     networks:
       - microservices-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8761/actuator/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  admin-db:
+    image: mysql:8
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
-
-  gateway:
-    build: ./microservice-gateway
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: admindb
     ports:
-      - "8080:8080"
-    depends_on:
-      - eureka-server
+      - "3306:3306"
     networks:
       - microservices-network
-
-  patient-service:
-    build: ./microservice-patient
-    ports:
-      - "8091:8091"
-    depends_on:
-      - eureka-server
-    networks:
-      - microservices-network
-
-  doctor-service:
-    build: ./microservice-doctor
-    ports:
-      - "8092:8092"
-    depends_on:
-      - eureka-server
-    networks:
-      - microservices-network
-
-  appointment-service:
-    build: ./microservice-appointment
-    ports:
-      - "8093:8093"
-    depends_on:
-      - eureka-server
-    networks:
-      - microservices-network
-
-  billing-service:
-    build: ./microservice-billing
-    ports:
-      - "8094:8094"
-    depends_on:
-      - eureka-server
-    networks:
-      - microservices-network
-
-  medicalrecord-service:
-    build: ./microservice-medicalrecord
-    ports:
-      - "8095:8095"
-    depends_on:
-      - eureka-server
-    networks:
-      - microservices-network
-
-  notification-service:
-    build: ./microservice-notification
-    ports:
-      - "8096:8096"
-    depends_on:
-      - eureka-server
-    networks:
-      - microservices-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   admin-service:
     build: ./microservice-admin
     ports:
       - "8097:8097"
     depends_on:
-      - eureka-server
+      eureka-server:
+        condition: service_healthy
+      admin-db:
+        condition: service_healthy
     networks:
       - microservices-network
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8097/actuator/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  gateway:
+    build: ./microservice-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+      admin-service:
+        condition: service_healthy
+    networks:
+      - microservices-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/actuator/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
 networks:
   microservices-network:

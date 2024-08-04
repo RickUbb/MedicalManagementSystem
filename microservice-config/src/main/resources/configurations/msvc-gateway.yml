@@ -3,18 +3,15 @@ server:
 
 spring:
   application:
-    name: msvc-gateway
+    name: msvs-gateway
   cloud:
     gateway:
       discovery:
         locator:
           enabled: true
       routes:
-        - id: patients
-          uri: lb://msvc-patient
+        - id: admins
+          uri: http://localhost:8097
           predicates:
-            - Path=/api/v1/patients/**
-        - id: doctors
-          uri: lb://msvc-doctor
-          predicates:
-            - Path=/api/v1/doctors/**
+            - Path=/api/v1/admins/**
+

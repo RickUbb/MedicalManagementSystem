@@ -1,6 +1,6 @@
-package com.microservice.admin.service;
+package service;
 
-import com.microservice.admin.entities.Admin;
+import entities.Admin;
 
 import java.util.List;
 

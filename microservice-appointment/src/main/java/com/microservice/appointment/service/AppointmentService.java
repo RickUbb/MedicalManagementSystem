@@ -45,6 +45,23 @@ public class AppointmentService implements IAppointmentService {
 
     @Override
     public List<PatientByAppointmentResponse> findAllAppointmentsWithDetails() {
+        List<Appointment> appointments = (List<Appointment>) appointmentRepository.findAll();
+        return appointments.stream()
+                .map(appointment -> {
+                    PatientDTO patient = patientClient.findPatientById(appointment.getPatientId());
+                    DoctorDTO doctor = doctorClient.findDoctorById(appointment.getDoctorId());
+                    return PatientByAppointmentResponse.builder()
+                            .appointmentReason(appointment.getReason())
+                            .appointmentDate(appointment.getAppointmentDate().toString())
+                            .patient(patient)
+                            .doctor(doctor)
+                            .build();
+                }).collect(Collectors.toList());
+    }
+
+    //Me dio errror
+    /*@Override
+    public List<PatientByAppointmentResponse> findAllAppointmentsWithDetails() {
         return appointmentRepository.findAll().forEach().map(appointment -> {
             PatientDTO patient = patientClient.findPatientById(appointment.getPatientId());
             DoctorDTO doctor = doctorClient.findDoctorById(appointment.getIdDoctor());
@@ -55,7 +72,7 @@ public class AppointmentService implements IAppointmentService {
                     .doctor(doctor)
                     .build();
         }).collect(Collectors.toList());
-    }
+    }*/
 
     /*@Override
     public List<Appointment> findAllByPatientId(Long patientId) {

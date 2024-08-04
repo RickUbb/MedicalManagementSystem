@@ -1,7 +1,7 @@
-package com.microservice.admin.service;
+package service;
 
-import com.microservice.admin.entities.Admin;
-import com.microservice.admin.persistence.AdminRepository;
+import entities.Admin;
+import persistence.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

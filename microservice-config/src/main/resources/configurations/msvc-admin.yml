@@ -6,20 +6,21 @@ spring:
     name: msvc-admin
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/adminDB
+    url: jdbc:mysql://admin-db:3306/admindb
     username: root
-    password: 1234
+    password: rootpassword
   jpa:
     hibernate:
       ddl-auto: create
     database: mysql
     database-platform: org.hibernate.dialect.MySQL8Dialect
   config:
-    import: optional:configserver:http://localhost:8888
+    import: optional:configserver:http://config-server:8888
 
 eureka:
   instance:
     hostname: localhost
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://eureka-server:8761/eureka/
+
